@@ -14,11 +14,18 @@ export class UsersService {
     return this.prisma.user.create({ data: createUserDto });
   }
 
+  find(email: string){
+    return this.prisma.user.findMany({ where: { email } })
+  }
+
   findAll() {
     return this.prisma.user.findMany();
   }
 
   findOne(id: number) {
+    if(!id){
+      return null
+    }
     return this.prisma.user.findUnique({ where: { id } });
   }
 
