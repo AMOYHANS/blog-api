@@ -5,7 +5,7 @@ import { diskStorage } from 'multer';
 import { Response } from 'express';
 import * as fs from 'fs';
 
-@Controller('api')
+@Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 

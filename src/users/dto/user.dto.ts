@@ -9,4 +9,13 @@ export class UserDto {
   @Expose()
   // @Transform(({ value }) => value.substring(0, 5))
   email: string;
+
+  @Expose()
+  avatar: string;
+
+  @Expose()
+  gender: string;
+
+  @Expose()
+  desc: string;
 }
