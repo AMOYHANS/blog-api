@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
@@ -13,9 +13,19 @@ export class PostsController {
   }
 
   @Get()
-  findAll() {
+  findAllWithUserId(@Query('userId') userId: number) {
+    if(userId)
+    return this.postsService.findAllWithUserId(+userId);
     return this.postsService.findAll();
   }
+
+  // @Get()
+  // findAllWithUserId(@Query('userId') userId: number, @Query("skip") skip:number, @Query("limit") limit: number) {
+  //   if(userId)
+  //   return this.postsService.findAllWithUserId(+userId, +skip, +limit);
+  //   return this.postsService.findAll(+skip, +limit);
+  // }
+
 
   @Get(':id')
   findOne(@Param('id') id: string) {

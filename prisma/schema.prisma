@@ -15,6 +15,7 @@ model User {
   avatar    String?
   gender    Int?
   desc      String?
+  bgImg     String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

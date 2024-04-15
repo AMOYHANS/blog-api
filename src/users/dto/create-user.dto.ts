@@ -11,6 +11,9 @@ export class CreateUserDto {
   @IsString()
   @IsOptional()
   avatar: string;
+  @IsString()
+  @IsOptional()
+  bgImg: string;
   @IsInt()
   @IsOptional()
   gender: number;

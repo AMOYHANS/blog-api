@@ -1,6 +1,9 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+import { randomBytes, scrypt as _scrypt } from "crypto";
+import { promisify } from "util";
 import { DatabaseService } from 'src/database/database.service';
+const scrypt = promisify(_scrypt);
 
 @Injectable()
 export class UsersService {
@@ -29,7 +32,10 @@ export class UsersService {
     return this.prisma.user.findUnique({ where: { id } });
   }
 
-  update(id: number, updateUserDto: Prisma.UserUpdateInput) {
+  async update(id: number, updateUserDto: Prisma.UserUpdateInput) {
+    if(updateUserDto.password){
+      updateUserDto.password = await this.hashPassword(updateUserDto.password as string)
+    }
     return this.prisma.user.update({ where: { id }, data: updateUserDto });
   }
 
@@ -47,5 +53,12 @@ export class UsersService {
     return this.prisma.follow.findMany({
       where: { userId },
     })
+  }
+
+  async hashPassword(password: string) {
+    const salt = randomBytes(8).toString('hex')
+    const hash = (await scrypt(password, salt, 32)) as Buffer
+    const result = salt + '.' + hash.toString('hex')
+    return result
   }
 }

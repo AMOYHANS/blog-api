@@ -1,5 +1,5 @@
 ### 请求用户
-GET http://localhost:3000/api/users
+GET http://localhost:3000/api/posts?userId=16
 
 
 ### 新建用户

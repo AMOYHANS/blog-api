@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { DatabaseService } from 'src/database/database.service';
 
@@ -18,11 +18,23 @@ export class PostsService {
     return this.prisma.post.findUnique({ where: { id } });
   }
 
+  findAllWithUserId(userId: number) {
+    return this.prisma.post.findMany({ where: { authorId: userId } });
+  }
+
+  // findAllWithUserId(userId: number, skip: number, take: number) {
+  //   return this.prisma.post.findMany({ where: { authorId: userId }, skip, take});
+  // }
+
   update(id: number, updatePostDto: Prisma.PostUpdateInput) {
     return this.prisma.post.update({ where: { id }, data: updatePostDto });
   }
 
-  remove(id: number) {
+  async remove(id: number) {
+    const post = await this.findOne(id);
+    if(!post){
+      throw new NotFoundException('post not found')
+    }
     return this.prisma.post.delete({ where: { id } });
   }
 

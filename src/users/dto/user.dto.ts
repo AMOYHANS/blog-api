@@ -14,6 +14,9 @@ export class UserDto {
   avatar: string;
 
   @Expose()
+  bgImg: string;
+
+  @Expose()
   gender: string;
 
   @Expose()
