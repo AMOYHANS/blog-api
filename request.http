@@ -52,14 +52,14 @@ Content-Type: application/json
 }
 
 ### 查询post
-GET http://localhost:3001/posts
+GET http://localhost:3000/api/posts
 
 ### like a post
-POST http://localhost:3001/posts/like/1
+POST http://localhost:3000/api/posts/like/1
 Content-Type: application/json
 
 {
-  "userId": 1
+  "userId": 3
 }
 
 ### 上传文件

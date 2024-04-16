@@ -9,7 +9,8 @@ export class PostsController {
 
   @Post()
   create(@Body() createPostDto: CreatePostDto) {
-    return this.postsService.create(createPostDto);
+    const {authorId, ...other} = createPostDto;
+    return this.postsService.create(other, authorId);
   }
 
   @Get()
@@ -25,7 +26,6 @@ export class PostsController {
   //   return this.postsService.findAllWithUserId(+userId, +skip, +limit);
   //   return this.postsService.findAll(+skip, +limit);
   // }
-
 
   @Get(':id')
   findOne(@Param('id') id: string) {

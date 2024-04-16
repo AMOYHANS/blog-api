@@ -6,12 +6,24 @@ import { DatabaseService } from 'src/database/database.service';
 export class PostsService {
   constructor(private prisma: DatabaseService) {}
 
-  create(createPostDto: Prisma.PostCreateInput) {
-    return this.prisma.post.create({ data: createPostDto });
+  create(createPostDto: any, authorId) {
+    return this.prisma.post.create({ data: {
+      ...createPostDto,
+      author: {
+        connect: {
+          id: authorId
+        }
+      }
+    } });
   }
 
   findAll() {
-    return this.prisma.post.findMany();
+    return this.prisma.post.findMany({
+      include:{
+        likeUsers: true,
+        author: true
+      }
+    });
   }
 
   findOne(id: number) {
@@ -19,7 +31,13 @@ export class PostsService {
   }
 
   findAllWithUserId(userId: number) {
-    return this.prisma.post.findMany({ where: { authorId: userId } });
+    return this.prisma.post.findMany({ 
+      where: { authorId: userId },
+      include:{
+        likeUsers: true,
+        author: true
+      }
+    });
   }
 
   // findAllWithUserId(userId: number, skip: number, take: number) {
@@ -39,31 +57,30 @@ export class PostsService {
   }
 
   // 将like反转
-  async likePost(postId: number, userId: number) {
-    const singleLike = await this.prisma.postLikes.findFirst({
+  async likePost(postId: number, likerId: number) {
+    const post = await this.prisma.postLikes.findUnique({
       where: {
-        AND: [
-          { likerId: userId },
-          { postId}
-        ]
-      },
-    })
-    if(singleLike){
-      return this.prisma.postLikes.update({
-        where:{
-          id: singleLike.id
-        },
-        data:{
-          isLike: !singleLike.isLike
+        postId_likerId: {
+          postId,
+          likerId
         }
-      })
-    }else{
-      return this.prisma.postLikes.create({
-        data:{
-          likerId: userId,
-          postId: postId,
+      }
+    })
+    if(post){
+      return this.prisma.postLikes.delete({
+        where: {
+          postId_likerId: {
+            postId,
+            likerId
+          }
         }
       })
     }
+    return this.prisma.postLikes.create({
+      data: {
+        postId,
+        likerId
+      }
+    })
   }
 }
