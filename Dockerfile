@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 COPY . .
 
 # 安装项目依赖
-RUN npm i -g pnpm && pnpm install && pnpx prisma migrate dev --name init 
+RUN npm config set registry https://registry.npm.taobao.org && npm i -g pnpm && pnpm install && pnpx prisma migrate dev --name init 
 
 # Step 2: 运行时使用更精简的基础镜像
 FROM node:18-alpine
