@@ -20,6 +20,9 @@ dependencies:
   '@nestjs/platform-socket.io':
     specifier: ^10.3.5
     version: 10.3.5(@nestjs/common@10.3.5)(@nestjs/websockets@10.3.5)(rxjs@7.8.1)
+  '@nestjs/serve-static':
+    specifier: ^4.0.2
+    version: 4.0.2(@nestjs/common@10.3.5)(@nestjs/core@10.3.5)
   '@nestjs/websockets':
     specifier: ^10.3.5
     version: 10.3.5(@nestjs/common@10.3.5)(@nestjs/core@10.3.5)(@nestjs/platform-socket.io@10.3.5)(reflect-metadata@0.2.1)(rxjs@7.8.1)
@@ -29,6 +32,9 @@ dependencies:
   '@types/cookie-session':
     specifier: ^2.0.48
     version: 2.0.48
+  '@types/multer':
+    specifier: ^1.4.11
+    version: 1.4.11
   class-transformer:
     specifier: ^0.5.1
     version: 0.5.1
@@ -38,6 +44,9 @@ dependencies:
   cookie-session:
     specifier: ^2.1.0
     version: 2.1.0
+  multer:
+    specifier: 1.4.5-lts.1
+    version: 1.4.5-lts.1
   reflect-metadata:
     specifier: ^0.2.0
     version: 0.2.1
@@ -64,9 +73,6 @@ devDependencies:
   '@types/jest':
     specifier: ^29.5.2
     version: 29.5.12
-  '@types/multer':
-    specifier: ^1.4.11
-    version: 1.4.11
   '@types/node':
     specifier: ^20.3.1
     version: 20.11.30
@@ -1054,6 +1060,27 @@ packages:
       - chokidar
     dev: true
 
+  /@nestjs/serve-static@4.0.2(@nestjs/common@10.3.5)(@nestjs/core@10.3.5):
+    resolution: {integrity: sha512-cT0vdWN5ar7jDI2NKbhf4LcwJzU4vS5sVpMkVrHuyLcltbrz6JdGi1TfIMMatP2pNiq5Ie/uUdPSFDVaZX/URQ==, tarball: https://registry.npmmirror.com/@nestjs/serve-static/-/serve-static-4.0.2.tgz}
+    peerDependencies:
+      '@fastify/static': ^6.5.0 || ^7.0.0
+      '@nestjs/common': ^9.0.0 || ^10.0.0
+      '@nestjs/core': ^9.0.0 || ^10.0.0
+      express: ^4.18.1
+      fastify: ^4.7.0
+    peerDependenciesMeta:
+      '@fastify/static':
+        optional: true
+      express:
+        optional: true
+      fastify:
+        optional: true
+    dependencies:
+      '@nestjs/common': 10.3.5(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.1)(rxjs@7.8.1)
+      '@nestjs/core': 10.3.5(@nestjs/common@10.3.5)(@nestjs/platform-express@10.3.5)(@nestjs/websockets@10.3.5)(reflect-metadata@0.2.1)(rxjs@7.8.1)
+      path-to-regexp: 0.2.5
+    dev: false
+
   /@nestjs/testing@10.3.5(@nestjs/common@10.3.5)(@nestjs/core@10.3.5)(@nestjs/platform-express@10.3.5):
     resolution: {integrity: sha512-j30/lxH0BayeDTigapYtQn/XhMRR7CzlFsm3dHoWViWQv0qT1r2ffe3927BbBLX3N/ZzglE10OAqW06ADZV8dw==, tarball: https://registry.npmmirror.com/@nestjs/testing/-/testing-10.3.5.tgz}
     peerDependencies:
@@ -1360,7 +1387,7 @@ packages:
     resolution: {integrity: sha512-svK240gr6LVWvv3YGyhLlA+6LRRWA4mnGIU7RcNmgjBYFl6665wcXrRfxGp5tEPVHUNm5FMcmq7too9bxCwX/w==, tarball: https://registry.npmmirror.com/@types/multer/-/multer-1.4.11.tgz}
     dependencies:
       '@types/express': 4.17.21
-    dev: true
+    dev: false
 
   /@types/node@20.11.30:
     resolution: {integrity: sha512-dHM6ZxwlmuZaRmUPfv1p+KrdD1Dci04FbdEm/9wEMouFqxYoFl5aMkt0VMAUtYRQDyYvD41WJLukhq/ha3YuTw==, tarball: https://registry.npmmirror.com/@types/node/-/node-20.11.30.tgz}
@@ -4134,6 +4161,19 @@ packages:
       type-is: 1.6.18
       xtend: 4.0.2
 
+  /multer@1.4.5-lts.1:
+    resolution: {integrity: sha512-ywPWvcDMeH+z9gQq5qYHCCy+ethsk4goepZ45GLD63fOu0YcNecQxi64nDs3qluZB+murG3/D4dJ7+dGctcCQQ==, tarball: https://registry.npmmirror.com/multer/-/multer-1.4.5-lts.1.tgz}
+    engines: {node: '>= 6.0.0'}
+    dependencies:
+      append-field: 1.0.0
+      busboy: 1.6.0
+      concat-stream: 1.6.2
+      mkdirp: 0.5.6
+      object-assign: 4.1.1
+      type-is: 1.6.18
+      xtend: 4.0.2
+    dev: false
+
   /mute-stream@0.0.8:
     resolution: {integrity: sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==, tarball: https://registry.npmmirror.com/mute-stream/-/mute-stream-0.0.8.tgz}
     dev: true
@@ -4346,6 +4386,10 @@ packages:
 
   /path-to-regexp@0.1.7:
     resolution: {integrity: sha512-5DFkuoqlv1uYQKxy8omFBeJPQcdoE07Kv2sferDCrAq1ohOU+MSDswDIbnx3YAM60qIOnYa53wBhXW0EbMonrQ==, tarball: https://registry.npmmirror.com/path-to-regexp/-/path-to-regexp-0.1.7.tgz}
+
+  /path-to-regexp@0.2.5:
+    resolution: {integrity: sha512-l6qtdDPIkmAmzEO6egquYDfqQGPMRNGjYtrU13HAXb3YSRrt7HSb1sJY0pKp6o2bAa86tSB6iwaW2JbthPKr7Q==, tarball: https://registry.npmmirror.com/path-to-regexp/-/path-to-regexp-0.2.5.tgz}
+    dev: false
 
   /path-to-regexp@3.2.0:
     resolution: {integrity: sha512-jczvQbCUS7XmS7o+y1aEO9OBVFeZBQ1MDSEqmO7xSoPgOPoowY/SxLpZ6Vh97/8qHZOteiCKb7gkG9gA2ZUxJA==, tarball: https://registry.npmmirror.com/path-to-regexp/-/path-to-regexp-3.2.0.tgz}
