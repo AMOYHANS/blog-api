@@ -1,1 +1,0 @@
-import{r as s}from"./request-DIB7XEWZ.js";const r=t=>s.post("/posts",t),n=t=>s.get(`/posts/${t}`),p=()=>s.get("/posts"),a=t=>s.get(`/posts?userId=${t}`),u=(t,e)=>s.post(`/posts/like/${t}`,e),c=(t,e)=>s.patch(`/posts/${t}`,e),l=t=>s.delete(`/posts/${t}`);export{a,n as b,r as c,l as d,p as g,u as l,c as u};

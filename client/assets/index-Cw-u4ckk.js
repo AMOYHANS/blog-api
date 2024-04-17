@@ -1,1 +1,0 @@
-import{r}from"./request-DIB7XEWZ.js";const n=s=>r.post("/users/signin",s),u=s=>r.post("/users/signup",s),o=(s,e)=>r.patch(`/users/${s}`,e),a=s=>r.get(`/users/${s}`);export{a as g,n as l,u as r,o as u};

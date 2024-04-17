@@ -1,1 +1,0 @@
-import{_ as e,a as c,c as n}from"./index-cWoudk2G.js";const t={};function a(o,r){return c(),n("div",null," 你来到了没有知识的荒原！ ")}const s=e(t,[["render",a],["__scopeId","data-v-d82fb984"]]);export{s as default};
