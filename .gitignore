@@ -57,5 +57,6 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 /prisma/migrations
 /prisma/db.sqlite
+/prisma/db.sqlite-journal
 /uploads
 /client
